@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MagiBar</title>
+  </head>
+
+  <style>
+    #container {
+      width: 400px;
+      height: 50px;
+      background-color: #403b3b;
+      position: absolute;
+    }
+    #bar {
+      width: 50px;
+      height: 50px;
+      background-color: #e51515;
+      position: absolute;
+    }
+  </style>
+
+  <body>
+    <h1>THIS IS A LOADING BAR:</h1>
+    <div id="container">
+      <div id="bar"></div>
+    </div>
+  </body>
+
+  <script>
+    function loadingbar(cb) {
+      const bar = document.getElementById("bar");
+
+      bar.style.left = 0;
+
+      function move() {
+        let left = parseInt(bar.style.left);
+        left += 1;
+        bar.style.left = left + "px";
+        if (left < 350) {
+          setTimeout(move, 10);
+        } else {
+          cb();
+
+          setTimeout(() => {
+            bar.style.left = 0;
+            move();
+          }, 1000);
+        }
+      }
+
+      move();
+
+      moveSetTimeout();
+    }
+
+    const t1 = Date.now();
+
+    function moveSetTimeout() {
+      console.log(`Animation finished in ${Date.now() - t1}ms`);
+    }
+
+    loadingbar(moveSetTimeout);
+  </script>
+</html>

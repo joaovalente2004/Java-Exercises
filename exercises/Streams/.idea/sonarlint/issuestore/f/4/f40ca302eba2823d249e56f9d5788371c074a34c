@@ -1,0 +1,19 @@
+
+P
+java:S11419"5Extract this nested try block into a separate method.(šì×ûÿÿÿÿÿ
+0
+java:S1220""Move this file to a named package.
+N	java:S106$"9Replace this use of System.out or System.err by a logger.(Ý¬î‰
+S	java:S106("9Replace this use of System.out or System.err by a logger.(—Ë—ƒüÿÿÿÿ
+N	java:S106+"9Replace this use of System.out or System.err by a logger.(äÎñÃ
+S	java:S1064"9Replace this use of System.out or System.err by a logger.(Ó¶ì¯ûÿÿÿÿ
+t
+java:S3012>"YUse "Arrays.copyOf", "Arrays.asList", "Collections.addAll" or "System.arraycopy" instead.(¯Éòïùÿÿÿÿ
+N	java:S106B"9Replace this use of System.out or System.err by a logger.(ÆŸøÐ
+S	java:S106C"9Replace this use of System.out or System.err by a logger.(ÞžÒ—üÿÿÿÿ
+N	java:S106H"9Replace this use of System.out or System.err by a logger.(Ú‰êÒ
+S	java:S106J"9Replace this use of System.out or System.err by a logger.(Á¶¾œþÿÿÿÿ
+S	java:S106K"9Replace this use of System.out or System.err by a logger.(ÞžÒ—üÿÿÿÿ
+N	java:S106L"9Replace this use of System.out or System.err by a logger.(­ß³Ø
+S	java:S106P"9Replace this use of System.out or System.err by a logger.(¨¶ÑÍþÿÿÿÿ
+S	java:S106T"9Replace this use of System.out or System.err by a logger.(¨¶ÑÍþÿÿÿÿ

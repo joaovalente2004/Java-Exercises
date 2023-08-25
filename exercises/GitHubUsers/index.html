@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="index.css" />
+    <title>GitHub Users</title>
+  </head>
+  <style>
+    img {
+      width: 100px;
+      height: 100px;
+      border-radius: 20px;
+      padding: 10px;
+      border: 3px solid rgb(251, 249, 249);
+    }
+    a {
+      text-decoration: none;
+
+      color: rgb(255, 249, 249);
+      font-size: 20px;
+    }
+    li {
+      list-style: none;
+      display: flex;
+      flex-direction: column-reverse;
+      flex-wrap: nowrap;
+      align-items: center;
+      padding: 12px;
+    }
+    body {
+      background-image: url("https://wallpapercave.com/wp/wp8409622.jpg");
+      
+      
+    }
+    h1{
+      text-align: center;
+      color: rgb(255, 249, 249);
+      font-size: 50px;
+      font-family: 'Times New Roman', Times, serif;
+    }
+  </style>
+
+  <body>
+    <div>
+      <h1>List Users</h1>
+
+      <form>
+        <input type="text" id="user" placeholder="Search User" />
+        <br />
+        <br />
+        <button type="submit" id="submit">Submit</button>
+        <ul id="users" style="display: flex;flex-direction: row-reverse;flex-wrap: wrap;justify-content: center;"></ul>
+      </form>
+    </div>
+  </body>
+
+  <script>
+    const url = "https://api.github.com/search/users?q=";
+
+    const submit = document.getElementById("submit");
+
+    const users = document.getElementById("users");
+
+    submit.addEventListener("click", function (e) {
+      e.preventDefault();
+      const user = document.getElementById("user").value;
+      if (user) {
+        getUser(user);
+        document.getElementById("user").value = "";
+      }
+    });
+
+    function getUser(user) {
+      fetch(url + user)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          users.innerHTML = "";
+          data.items.forEach((item) => {
+            const li = document.createElement("li");
+            li.innerHTML = `
+                <img src="${item.avatar_url}" alt="${item.login}" /> <br>
+                <a href="${item.html_url}" target="_blank">${item.login}</a>
+                <br>
+                `;
+            users.appendChild(li);
+          });
+        });
+    }
+  </script>
+</html>

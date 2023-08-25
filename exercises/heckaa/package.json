@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "angular": "^1.8.3",
+    "bootstrap-icons": "^1.10.5",
+    "cors": "^2.8.5",
+    "firebase": "^10.2.0"
+  }
+}

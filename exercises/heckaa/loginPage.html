@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link rel="stylesheet" type="text/css" href="login.css" />
+  <title>Login</title>
+</head>
+<style>
+  body {
+    background-image: url("images/back.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+</style>
+
+<body>
+  <section class="vh-100 gradient-custom">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card bg-dark text-white" style="border-radius: 1rem">
+            <div class="card-body p-5 text-center">
+              <div class="mb-md-5 mt-md-4 pb-5">
+                <h2 class="fw-bold mb-2 text-uppercase" style="color: #c5953f;">Login</h2>
+                <p class="text-white-50 mb-5">
+                  Please enter your login and password!
+                </p>
+
+                <div class="form-outline form-white mb-4">
+                  <input type="email" id="typeEmailX" class="form-control form-control-lg" placeholder="Email" />
+                </div>
+                <br />
+                <div class="form-outline form-white mb-4">
+
+                  <input type="password" id="typePasswordX" class="form-control form-control-lg" placeholder="Password">
+
+
+
+                </div>
+
+
+                <button class="btn btn-outline-light btn-lg px-5" type="button" id="submitData" name="submitData">
+                  Login
+                </button>
+
+
+                <div id="login-error-message" class="text-danger"></div><br><br>
+                <a href="singleplayer.html">
+                  <button class="btn btn-outline-light btn-lg px-5" type="button" id="submitData" name="submitData">
+                    Play as Guest
+                  </button>
+                </a>
+              </div>
+
+              <div>
+                <p class="mb-0">
+                  Don't have an account?
+                  <a href="register.html" class="text-white-50 fw-bold">Sign Up</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+
+</html>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-app.js";
+  import {
+    getFirestore,
+    doc,
+    collection,
+    getDoc,
+    query,
+    where,
+    getDocs,
+  } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCdwzD12cU_Hxp7odCqFbBIcNmqyaeXeUk",
+    authDomain: "heckatron-a282f.firebaseapp.com",
+    databaseURL:
+      "https://heckatron-a282f-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "heckatron-a282f",
+    storageBucket: "heckatron-a282f.appspot.com",
+    messagingSenderId: "615664701372",
+    appId: "1:615664701372:web:38d56d9062ef1b3a8fe5b9",
+  };
+
+  const app = initializeApp(firebaseConfig);
+
+  const db = getFirestore(app);
+
+  var email = document.getElementById("typeEmailX");
+  var password = document.getElementById("typePasswordX");
+
+  var submitData = document.getElementById("submitData");
+
+  submitData.addEventListener("click", async function () {
+    var emailValue = email.value;
+    var passwordValue = password.value;
+
+    if (emailValue == "" || passwordValue == "") {
+      document.getElementById("login-error-message").innerHTML =
+        "Please fill all the fields";
+    } else {
+      document.getElementById("login-error-message").innerHTML = "";
+
+      try {
+        const q = query(
+          collection(db, "users"),
+          where("email", "==", emailValue),
+          where("password", "==", passwordValue)
+        );
+
+        const querySnapshot = await getDocs(q);
+
+        querySnapshot.forEach((doc) => {
+          console.log(`${doc.id} => ${doc.data()}`);
+        });
+
+        if (querySnapshot.size == 0) {
+          document.getElementById("login-error-message").innerHTML =
+            "Invalid email or password";
+        } else {
+          var user = querySnapshot.docs[0].id;
+          localStorage.setItem("user", user);
+
+          alert("Login successful");
+          window.location.href = "mainPage.html";
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  });
+</script>

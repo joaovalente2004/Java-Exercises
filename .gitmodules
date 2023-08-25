@@ -1,0 +1,3 @@
+[submodule "exercises/Stand/stand_carros"]
+	path = exercises/Stand/stand_carros
+	url = https://github.com/joaovalente2004/Java-Exercises.git

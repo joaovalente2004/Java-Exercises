@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <title>Convert Coin</title>
+  </head>
+
+  <style>
+    input {
+        width: 200px;
+        height: 30px;
+        border-radius: 10px;
+        border: 1px solid #21ffcb;
+        text-align: center;
+        font-size: 20px;
+    }
+    button {
+        border: #ff2321;
+    box-shadow: inset 0px 0px 7px 0px #24db7e;
+      font-size: 20px;
+      border-radius: 37px;
+      cursor: pointer;
+    }
+    button:hover {
+        background-color: #1a5f9b;
+        color: #fff;
+        box-shadow: inset 0px 0px 7px 0px #24db7e;
+    }
+    h1 {
+        font-size: 50px;
+        color: #2165ff;
+    font-family: monospace;
+    }
+    #container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    }
+    select {
+        width: 200px;
+        height: 30px;
+        border-radius: 10px;
+        border: 1px solid #21ffcb;
+        text-align: center;
+        font-size: 20px;
+    }
+    form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #2c238beb;
+    border-radius: 27px;
+    box-shadow: inset 0px 0px 20px 3px #00cfff;
+    width: 43%;
+    margin-top: 237px;
+    }
+    p {
+        font-size: 20px;
+        color: #2165ff;
+        font-family: monospace;
+    }
+
+    
+  </style>
+
+  <body>
+   
+
+    <div id="container">
+        <form action="">
+        <h1>CONVERT COIN</h1>
+        <p>Insert amount in EUR :</p>
+        <input type="text" id="input" name="input" value="0"><br><br>
+
+        <select name="coin" id="coin">
+            
+        </select>
+        <p id="USD"></p>
+        <button id="convertBtn" >Convert</button>
+        <BR></BR>
+    </form>
+    </div>
+
+    
+  </body>
+
+  
+  <script>
+
+     const chooseCoin = document.getElementById("coin");
+
+     const url = "https://open.er-api.com/v6/latest/USD";
+
+
+        $.get(url, function (data, status) {
+            const rates = data.rates;
+            const keys = Object.keys(rates);
+            const values = Object.values(rates);
+            for (let i = 0; i < keys.length; i++) {
+                const option = document.createElement("option");
+                option.value = values[i];
+                option.text = keys[i];
+                chooseCoin.appendChild(option);
+            }
+        });
+
+    $(document).ready(function () {
+        $("#convertBtn").click(function () {
+            const input = $("#input").val();
+            const coin = $("#coin").val();
+            const result = input * coin;
+            $("#USD").text(result);
+
+
+        });
+
+
+
+        
+    });
+
+
+
+</script>
+</html>

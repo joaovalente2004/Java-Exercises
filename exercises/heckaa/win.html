@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #000;
+        }
+
+        video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+    </style>
+</head>
+
+<body>
+    <video autoplay muted loop>
+        <source src="images/win.mp4" type="video/mp4">
+
+    </video>
+
+
+    </div>
+</body>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-app.js";
+import {
+  getFirestore,
+  doc,
+  collection,
+  getDoc,
+  setDoc,
+  query,
+  where,
+  getDocs,
+} from "https://www.gstatic.com/firebasejs/10.2.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCdwzD12cU_Hxp7odCqFbBIcNmqyaeXeUk",
+  authDomain: "heckatron-a282f.firebaseapp.com",
+  databaseURL:
+    "https://heckatron-a282f-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "heckatron-a282f",
+  storageBucket: "heckatron-a282f.appspot.com",
+  messagingSenderId: "615664701372",
+  appId: "1:615664701372:web:38d56d9062ef1b3a8fe5b9",
+};
+
+    const app = initializeApp(firebaseConfig);
+
+    const db = getFirestore(app);
+
+    var userId = localStorage.getItem("user");
+
+    var video = document.querySelector('video');
+
+    if (userId != null) {
+        const userDocRef = doc(db, "users", userId);
+        const userDocSnap = await getDoc(userDocRef);
+
+
+        setTimeout(() => {
+            window.location.href = "mainPage.html";
+        }, 5000);
+    }
+    else {
+        setTimeout(() => {
+            window.location.href = "index.html";
+        }, 5000);
+    }
+
+</script>
+
+</html>
